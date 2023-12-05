@@ -1,5 +1,5 @@
 function meatballs()
-    addpath('./savelib/')
+    % addpath('./savelib/')
     rand('seed', 1125);
     close all;
     disp("Sugma.");
@@ -9,7 +9,7 @@ function meatballs()
     grid off;
     axis off;
 
-    set(gcf, 'Position', [100 100 3000 800]);
+    set(gcf, 'Position', [100 100 1400 1400]);
 
     % Number of points to generate
     % numPoints = 200;
@@ -52,7 +52,7 @@ function meatballs()
     plot_glow(behindXo, behindYo, outercolor);
 
     % TRIANGLE SEGMENT
-    triangleRadius = .95; % Adjust the radius of the triangle
+    triangleRadius = .9; % Adjust the radius of the triangle
     triangleAngle = linspace(0, 2 * pi, 4); % Three points for a triangle
     triangleX = triangleRadius * cos(triangleAngle);
     triangleY = triangleRadius * sin(triangleAngle);
@@ -66,18 +66,18 @@ function meatballs()
     % rotatedTriangle = [triangleX; triangleY];
 
     % Plot the rotated triangle with opacity
-    fill(rotatedTriangle(1, :), rotatedTriangle(2, :), 'k') % , 'FaceAlpha', 0.75);
+    fill(rotatedTriangle(1, :), rotatedTriangle(2, :), 'k' , 'FaceAlpha', 0.75);
 
     % RECTANGLE LOOP
-    for rectNum = 1:3
-        width = .05;
-        baseypos = rectNum/3 - (1.73205/2);
-        rectx = [0 rectNum*2 rectNum*2 0];
-        recty = [(width/2)+baseypos, (width/2)+baseypos, -(width/2)+baseypos, -(width/2)+baseypos];
+    % for rectNum = 1:3
+    %     width = .05;
+    %     baseypos = rectNum/3 - (1.73205/2);
+    %     rectx = [0 rectNum*2 rectNum*2 0];
+    %     recty = [(width/2)+baseypos, (width/2)+baseypos, -(width/2)+baseypos, -(width/2)+baseypos];
 
-        % Plot rectangles without affecting the opacity of the triangle
-        hRect = fill(rectx, recty, 'k');
-    end
+    %     % Plot rectangles without affecting the opacity of the triangle
+    %     hRect = fill(rectx, recty, 'k');
+    % end
 
     % % Plot the sphere dots in front of the triangle
     frontX = x(z >= 0);
@@ -92,11 +92,11 @@ function meatballs()
     scatter(frontXo, frontYo, 10, outercolor, 'filled');
     plot_glow(frontXo, frontYo, outercolor);
 
-    % set(gcf,'Color', [.2 .2 .2])
-    % set(gcf, "Color", "None");
-    % set(gca, "Color", "None");
+    set(gcf,'Color', [.2 .2 .2]);
 
-    exportgraphics(gcf,'meatballs.png') %, 'Resolution', 500)
+    exportgraphics(gcf,'meatballs.png', 'Resolution', 500);
+    exportgraphics(gcf,'vectorfig.pdf','ContentType','vector')
+    exportgraphics(gcf,'vectorfig.eps','ContentType','vector')
 
 end
 
